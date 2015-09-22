@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="SV_ElasticSearchInfo" title="Elastic Search Information" version_string="1.0.0" version_id="1000000" url="" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates>
+    <template title="SV_ElasticSearch_info"><![CDATA[<style>
+#ESVer dl
+{
+	line-height: 1.9;
+	font-size: 11px;
+}
+</style>
+
+<div class="section" id="ESVer">
+	<div class="secondaryContent statsList">
+		<h3 class="textHeading">{xen:phrase esver_addon}</h3>
+		<div class="pairsJustified">
+			<dl>
+				<span class="label"><dt>{xen:phrase es_version}:</dt></span>
+				<dd>{$esVersion}</dd>
+			</dl>
+			<xen:if is="{$esStats}">
+				<dl><dt>{xen:phrase es_documents}:</dt> <dd>{xen:number $esStats.docs.count} ({xen:number $esStats.store.size_in_bytes, size})</dd></dl>
+				<dl><dt>{xen:phrase es_index_updates}:</dt> <dd>{xen:number $esStats.indexing.index_total} <xen:if is="{$esStats.indexing.index_total}">({xen:phrase x_seconds_average, "time={xen:number {xen:calc '{$esStats.indexing.index_time_in_millis} / {$esStats.indexing.index_total} / 1000'}, 4}"})</xen:if></dd></dl>
+				<dl><dt>{xen:phrase es_searches}:</dt> <dd>{xen:number $esStats.search.query_total} <xen:if is="{$esStats.search.query_total}">({xen:phrase x_seconds_average, "time={xen:number {xen:calc '{$esStats.search.query_time_in_millis} / {$esStats.search.query_total} / 1000'}, 4}"})</xen:if></dd></dl>
+				<dl><dt>{xen:phrase es_fetches}:</dt> <dd>{xen:number $esStats.search.fetch_total} <xen:if is="{$esStats.search.fetch_total}">({xen:phrase x_seconds_average, "time={xen:number {xen:calc '{$esStats.search.fetch_time_in_millis} / {$esStats.search.fetch_total} / 1000'}, 4}"})</xen:if></dd></dl>
+			</xen:if>
+		</div>
+	</div>
+</div>]]></template>
+  </admin_templates>
+  <admin_template_modifications>
+    <modification template="home" modification_key="SV_ElasticSearchInfo_home1" description="" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[</div>
+		</div>
+		
+		<!-- slot: pre_add_ons -->]]></find>
+      <replace><![CDATA[$0
+<xen:include template="SV_ElasticSearch_info"/>]]></replace>
+    </modification>
+  </admin_template_modifications>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="load_class" execute_order="10" callback_class="SV_ElasticSearchInfo_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerAdmin_Home" description="XenForo_ControllerAdmin_Home"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="esver_addon" version_id="1000000" version_string="1.0.0"><![CDATA[Elasticsearch Information]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications/>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
