@@ -31,7 +31,7 @@
 </div>]]></template>
   </admin_templates>
   <admin_template_modifications>
-    <modification template="home" modification_key="SV_ElasticSearchInfo_home1" description="" execution_order="10" enabled="1" action="str_replace">
+    <modification template="home" modification_key="SV_ElasticSearchInfo_home1" description="Add ElasticSearch Info" execution_order="9" enabled="1" action="str_replace">
       <find><![CDATA[</div>
 		</div>
 		
