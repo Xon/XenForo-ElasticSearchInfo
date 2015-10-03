@@ -31,13 +31,11 @@
 </div>]]></template>
   </admin_templates>
   <admin_template_modifications>
-    <modification template="home" modification_key="SV_ElasticSearchInfo_home1" description="Add ElasticSearch Info" execution_order="9" enabled="1" action="str_replace">
-      <find><![CDATA[</div>
-		</div>
-		
-		<!-- slot: pre_add_ons -->]]></find>
-      <replace><![CDATA[$0
-<xen:include template="SV_ElasticSearch_info"/>]]></replace>
+    <modification template="home" modification_key="SV_ElasticSearchInfo_home1" description="Add ElasticSearch Info" execution_order="5000" enabled="1" action="preg_replace">
+      <find><![CDATA[#(<div class="sidebar">.*<!-- slot: pre_add_ons -->.*?)(\s*<xen:if is="{\$canManageAddOns}">)#si]]></find>
+      <replace><![CDATA[$1
+<xen:include template="SV_ElasticSearch_info"/>
+$2]]></replace>
     </modification>
   </admin_template_modifications>
   <code_events/>
